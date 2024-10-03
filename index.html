@@ -41,7 +41,7 @@
         socket.onmessage = function(event) {
             const bacElement = document.getElementById('bac');
             const newBAC = event.data;
-            bacElement.textContent = newBAC + ' %BAC';
+            bacElement.textContent = newBAC + '%';
         };
 
         socket.onerror = function(error) {
