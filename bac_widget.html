@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAC Widget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #widget {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        #bac {
+            font-size: 3em;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div id="widget">
+        <h1>Current BAC Level</h1>
+        <div id="bac">0.000 %BAC</div>
+    </div>
+
+    <script>
+        const socket = new WebSocket('wss://<random-id>.ngrok.io');
+
+        socket.onmessage = function(event) {
+            const bacElement = document.getElementById('bac');
+            const newBAC = event.data;
+            bacElement.textContent = newBAC + ' %BAC';
+        };
+
+        socket.onerror = function(error) {
+            console.error("WebSocket error:", error);
+        };
+    </script>
+</body>
+</html>
